@@ -19,6 +19,7 @@ const patient={
   age: 28,
   gender: 'Female',
   has_covid: false,
+  reason_for_visit: 'Abdominal Pain',
   profile:{
     current_medications: ['Losartan'], 
     medical_conditions: ['Hypertension'],
