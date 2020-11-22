@@ -17,7 +17,7 @@ export function NewPatientModal(props) {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <NewPatientForm/>
+        <NewPatientForm onFormSubmit={props.onFormSubmit} office={props.office}/>
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={props.onHide}>Close</Button>

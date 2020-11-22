@@ -9,6 +9,9 @@ import {
 } from "react-router-dom";
 const history = createBrowserHistory()
 
+function getOffice (){
+  return{id:1}
+}
 function getDoctor() {
   return {id:1}
   //come back to this when we go login to get the actual doc ID
@@ -43,7 +46,7 @@ function App() {
     <div className="App">
       <Router history={history}> 
       <Switch>
-        <Route path="/" exact render={() => <DoctorContainer doctor={getDoctor()}/> }/>
+        <Route path="/" exact render={() => <DoctorContainer office={getOffice()}doctor={getDoctor()}/> }/>
           <Route path="/patients" render={() => <PatientContainer patient={patient}/> }/>
           </Switch>
       </Router>
