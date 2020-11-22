@@ -1,12 +1,15 @@
 import React from 'react'
-import NewPatientForm from '../Components/NewPatientForm'
+import {NewPatientModal} from '../Components/NewPatientModal'
 import PatientList from '../Components/PatientList'
+import {Button} from "react-bootstrap"
+
 class DoctorContainer extends React.Component {
 
     
     state = {
         patients: [],
-        highPriority: []
+        highPriority: [],
+        showNewPatientModal: false
     }
     
     componentDidMount(){
@@ -19,14 +22,21 @@ class DoctorContainer extends React.Component {
         })
     }
 
+    toggleNewPatientModal = (show) =>{
+        console.log("HEYY", show)
+        this.setState({showNewPatientModal:show})
+    }
 
     render(){
         console.log(this.state)
         return  (
             <div>
                 <h1> "Welcome Back Dr.Grey!" </h1>
-                <NewPatientForm/>
+                <NewPatientModal onHide={()=> this.toggleNewPatientModal(false)} show={this.state.showNewPatientModal}/>
                 <PatientList patients={this.state.patients}/>
+                <Button variant="primary" onClick={() => this.toggleNewPatientModal(true)}>
+                    Add New Patient
+                </Button>
             </div>
         )
         
