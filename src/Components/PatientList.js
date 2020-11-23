@@ -1,5 +1,7 @@
 import React from "react";
 import {Table, Button} from "react-bootstrap";
+import history from './history'
+import {withRouter} from 'react-router'
 
 
 class PatientList extends React.Component {
@@ -38,6 +40,12 @@ class PatientList extends React.Component {
                           }}>
                           Remove
                         </Button>
+                        <Button onClick={(e) =>{
+                          e.stopPropagation()
+                          history.push('/patients/' + p.id)
+                        }}>
+                          Chart
+                        </Button>
                       </td>
                     </tr>
                     )
@@ -51,4 +59,4 @@ class PatientList extends React.Component {
   }
 }
 
-export default PatientList;
+export default withRouter(PatientList)

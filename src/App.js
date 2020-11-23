@@ -1,13 +1,12 @@
 import './App.css';
 import DoctorContainer from './Containers/DoctorContainer'
 import PatientContainer from './Containers/PatientContainer'
-import { createBrowserHistory} from 'history'
+import history from './Components/history'
 import {
-  BrowserRouter as Router,
+  Router,
   Switch,
   Route,
 } from "react-router-dom";
-const history = createBrowserHistory()
 
 function getOffice (){
   return{id:1}
@@ -44,7 +43,7 @@ const patient={
 function App() {
   return (
     <div className="App">
-      <Router history={history}> 
+      <Router forceRefresh={true} history={history}> 
       <Switch>
         <Route path="/" exact render={() => <DoctorContainer office={getOffice()}doctor={getDoctor()}/> }/>
           <Route path="/patients" render={() => <PatientContainer patient={patient}/> }/>
