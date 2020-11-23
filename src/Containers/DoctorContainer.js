@@ -12,6 +12,18 @@ class DoctorContainer extends React.Component {
         showNewPatientModal: false
     }
     
+    addPriority = (p) => {
+        if(!this.state.highPriority.some(patient=> patient.id === p.id)){
+            this.setState({highPriority: [...this.state.highPriority, p]})
+        }
+    }
+
+    removePatient = (p) => {
+        let remove = this.state.patients.filter(patient=> patient.id === p)
+        console.log(remove)
+    } 
+
+
     handleSubmit = (e) => {
         console.log("hey", e)
         e.preventDefault()
@@ -88,12 +100,14 @@ class DoctorContainer extends React.Component {
     }
 
     render(){
-        console.log(this.state)
         return  (
             <div>
                 <h1> "Welcome Back Dr.Grey!" </h1>
                 <NewPatientModal onFormSubmit={this.handleSubmit} office={this.props.office} onHide={()=> this.toggleNewPatientModal(false)} show={this.state.showNewPatientModal}/>
-                <PatientList patients={this.state.patients}/>
+                <h1> All Patients</h1>
+                <PatientList removePatient={this.removePatient} addPriority={this.addPriority} patients={this.state.patients}/>
+                <h1> High Priority Patients</h1>
+                <PatientList isPriorityTable={true} patients={this.state.highPriority}/>
                 <Button variant="primary" onClick={() => this.toggleNewPatientModal(true)}>
                     Add New Patient
                 </Button>

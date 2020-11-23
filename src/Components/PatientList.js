@@ -1,5 +1,6 @@
 import React from "react";
-import Table from "react-bootstrap/Table";
+import {Table, Button} from "react-bootstrap";
+
 
 class PatientList extends React.Component {
   render() {
@@ -12,7 +13,8 @@ class PatientList extends React.Component {
             <th>Patient Name</th>
             <th>Covid?</th>
             <th>Reason for Visit</th>
-          </tr>
+            {!this.props.isPriorityTable && <th>Options</th>}     
+            </tr>
         </thead>
         <tbody>
          
@@ -20,11 +22,16 @@ class PatientList extends React.Component {
                 this.props.patients.map(p => {
                     let covid=(p.has_covid) ? 'Covid Positive' : 'Covid Negative'
                     return (
-                    <tr>
+                    <tr onClick={() => this.props.addPriority(p)}>
                     <td>{p.floor}</td>
                     <td>{p.name}</td>
                     <td>{covid}</td>
                     <td>{p.reason_for_visit}</td>
+                    {!this.props.isPriorityTable &&<td>
+                      <Button onClick={() => this.props.removePatient(p.id)}>
+                        Remove
+                      </Button>
+                    </td>}
                     </tr>
                     )
                 })
