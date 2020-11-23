@@ -13,7 +13,7 @@ class PatientList extends React.Component {
             <th>Patient Name</th>
             <th>Covid?</th>
             <th>Reason for Visit</th>
-            {!this.props.isPriorityTable && <th>Options</th>}     
+            <th>Options</th>
             </tr>
         </thead>
         <tbody>
@@ -22,16 +22,23 @@ class PatientList extends React.Component {
                 this.props.patients.map(p => {
                     let covid=(p.has_covid) ? 'Covid Positive' : 'Covid Negative'
                     return (
-                    <tr onClick={() => this.props.addPriority(p)}>
-                    <td>{p.floor}</td>
-                    <td>{p.name}</td>
-                    <td>{covid}</td>
-                    <td>{p.reason_for_visit}</td>
-                    {!this.props.isPriorityTable &&<td>
-                      <Button onClick={() => this.props.removePatient(p.id)}>
-                        Remove
-                      </Button>
-                    </td>}
+                    <tr onClick={() => {
+                      if(!this.props.isPriorityTable){
+                        this.props.addPriority(p)
+                      }
+                      }}>
+                      <td>{p.floor}</td>
+                      <td>{p.name}</td>
+                      <td>{covid}</td>
+                      <td>{p.reason_for_visit}</td>
+                      <td>
+                        <Button variant='danger' size='sm' onClick={(e) => {
+                          e.stopPropagation()
+                          this.props.removeButton(p)
+                          }}>
+                          Remove
+                        </Button>
+                      </td>
                     </tr>
                     )
                 })

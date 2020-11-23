@@ -12,17 +12,40 @@ class DoctorContainer extends React.Component {
         showNewPatientModal: false
     }
     
+    updatePatient = (p) => {
+        let options = {
+            method: "PATCH" ,
+            headers:{
+              "content-type" : "application/json",
+              "accept" : "application/json"
+            },
+            body: JSON.stringify(p)
+          }
+        
+        fetch('http://localhost:4000//patients/' + p.id, options)
+        .then(response => response.json())
+    }
+
     addPriority = (p) => {
         if(!this.state.highPriority.some(patient=> patient.id === p.id)){
             this.setState({highPriority: [...this.state.highPriority, p]})
+            p['priority'] = true
+            this.updatePatient(p)
         }
     }
 
     removePatient = (p) => {
-        let remove = this.state.patients.filter(patient=> patient.id === p)
+        let remove = this.state.patients.filter(patient=> patient.id !== p.id)
         console.log(remove)
+        this.setState({patients:remove})
     } 
 
+    removePriority = (p) => {
+        let remove = this.state.highPriority.filter(patient=> patient.id !== p.id)
+        this.setState({highPriority:remove})
+        p['priority'] = false
+        this.updatePatient(p)
+    } 
 
     handleSubmit = (e) => {
         console.log("hey", e)
@@ -47,6 +70,7 @@ class DoctorContainer extends React.Component {
             has_covid: false,
             reason_for_visit: '',
             comments: comments,
+            priority: false,
             floor: ' ',
             office_id: this.props.office.id,
             profile:{
@@ -92,6 +116,10 @@ class DoctorContainer extends React.Component {
                 patients: [...patientList]
             })
         })
+        .then(r=>{
+            let priority = this.state.patients.filter((p) => p.priority)
+            this.setState({highPriority: priority})
+        })
     }
 
     toggleNewPatientModal = (show) =>{
@@ -105,9 +133,9 @@ class DoctorContainer extends React.Component {
                 <h1> "Welcome Back Dr.Grey!" </h1>
                 <NewPatientModal onFormSubmit={this.handleSubmit} office={this.props.office} onHide={()=> this.toggleNewPatientModal(false)} show={this.state.showNewPatientModal}/>
                 <h1> All Patients</h1>
-                <PatientList removePatient={this.removePatient} addPriority={this.addPriority} patients={this.state.patients}/>
+                <PatientList removeButton={this.removePatient} addPriority={this.addPriority} patients={this.state.patients}/>
                 <h1> High Priority Patients</h1>
-                <PatientList isPriorityTable={true} patients={this.state.highPriority}/>
+                <PatientList removeButton={this.removePriority} isPriorityTable={true} patients={this.state.highPriority}/>
                 <Button variant="primary" onClick={() => this.toggleNewPatientModal(true)}>
                     Add New Patient
                 </Button>
