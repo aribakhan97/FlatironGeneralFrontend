@@ -1,12 +1,17 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import ExamForm from '../Components/ExamForm'
+import { ExamModal } from '../Components/ExamModal'
+import {Button} from "react-bootstrap"
+import ExamHistory from '../Components/ExamHistory'
 
 class PatientContainer extends React.Component {
 
     state = {
         patient: {},
-        isLoaded: false
+        isLoaded: false,
+        showExamModal: false,
+        exams: []
     }
     componentDidMount(){
         let id=window.location.pathname.split('/')[2]
@@ -15,10 +20,61 @@ class PatientContainer extends React.Component {
         .then(response => response.json())
         .then(p => {
             console.log(p)
-            this.setState({patient: p, isLoaded: true })
+            this.setState({patient: p.patient, exams:p.exams, isLoaded: true })
     })
   }
+  toggleExamModal = (show) => {
+    this.setState({showExamModal: show})
+    }
 
+    handleSubmit = (e) => {
+        console.log(e)
+        e.preventDefault()
+        let date = new Date(e.target[0].value).toISOString()
+        let vitals = {
+            height: e.target[1].value,
+            weight: e.target[2].value,
+            temperature: e.target[3].value,
+            oxygen: e.target[4].value,
+            bp: e.target[5].value,
+            hr: e.target[6].value,
+            rr: e.target[7].value
+        }
+        let physical = {
+            appearance: e.target[8].value,
+            hs: e.target[9].value,
+            ls: e.target[10].value,
+            pupils: e.target[11].value,
+            sp: e.target[12].value,
+        }
+
+        let diagnosis = e.target[13].value
+        let comments = e.target[14].value
+
+        let exam ={
+            date: date,
+            vitals:vitals,
+            physical:physical,
+            diagnosis:diagnosis,
+            comments:comments,
+            patient_id: this.state.patient.id
+        }
+        let options = {
+            method: "POST" ,
+            headers:{
+              "content-type" : "application/json",
+              "accept" : "application/json"
+            },
+            body: JSON.stringify(exam)
+          }
+
+          fetch('http://localhost:4000/exams/', options)
+          .then(response => response.json())
+          .then(data => {
+            this.setState({exams: [...this.state.exams,data]})
+          })
+    }
+    
     render(){
 
         let patient=this.state.patient
@@ -52,8 +108,11 @@ class PatientContainer extends React.Component {
                 <p> Heart Rate: {profile.vitals.hr}</p>
                 <p> Respiratory Rate: {profile.vitals.rr}</p>
                 
-
-                <ExamForm/>
+                <ExamModal handleSubmit={this.handleSubmit} onHide={() => this.toggleExamModal(false)} show={this.state.showExamModal}/>
+                <Button variant="primary" onClick={() => this.toggleExamModal(true)}>
+                    Add New Exam
+                </Button>
+                <ExamHistory exams={this.state.exams}/>
                 
             </div>}
             </div>
