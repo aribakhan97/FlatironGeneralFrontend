@@ -9,9 +9,9 @@ class ExamHistory extends React.Component {
     return (
       <Accordion defaultActiveKey="0">
         {exams.map((e, i) => {
-            let vitals = JSON.parse(e.vitals)
+            let vitals = convertToJsonObject(e.vitals)
             console.log('vitals', vitals)
-            let physical = JSON.parse(e.physical)
+            let physical = convertToJsonObject(e.physical)
             console.log('physical', physical)
 
           return (
@@ -50,5 +50,29 @@ class ExamHistory extends React.Component {
     );
   }
 }
+
+function convertToJsonObject(obj) {
+  if (IsJsonString(obj)) {
+    return JSON.parse(obj)
+  } else if (isObject(obj)) {
+    return obj;
+  } else {
+    return null;
+  }
+}
+function IsJsonString(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+    return true;
+}
+
+function isObject(obj)
+{
+    return obj !== undefined && obj !== null && obj.constructor == Object;
+}
+
 
 export default ExamHistory;

@@ -120,7 +120,7 @@ class DoctorContainer extends React.Component {
           .then(response => response.json())
           .then(data => {
             this.setState({patients: [...this.state.patients,data]})
-          })
+          }).then(() => this.toggleNewPatientModal(false))
     }
     componentDidMount(){
         fetch('http://localhost:4000/patient_list/' + this.props.doctor.id)

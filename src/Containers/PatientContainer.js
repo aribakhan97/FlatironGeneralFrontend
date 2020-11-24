@@ -80,7 +80,7 @@ class PatientContainer extends React.Component {
           .then(response => response.json())
           .then(data => {
             this.setState({exams: [...this.state.exams,exam]})
-          })
+          }).then(() => this.toggleExamModal(false))
     }
     
     render(){
