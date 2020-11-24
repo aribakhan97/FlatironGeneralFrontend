@@ -77,6 +77,7 @@ class NewPatientForm extends React.Component {
             <Form.Label> Full Name </Form.Label>
             <Form.Control type="text" placeholder="John Doe" />
           </Form.Group>
+
           <Form.Group controlId="exampleForm.ControlSelect1">
             <Form.Label>Gender</Form.Label>
             <Form.Control as="select">
@@ -142,6 +143,26 @@ class NewPatientForm extends React.Component {
             <Form.Label>Additional Comments</Form.Label>
             <Form.Control as="textarea" rows={3} />
           </Form.Group>
+
+          <Form.Group controlId="exampleForm.ControlSelect1">
+            <Form.Label>Covid?</Form.Label>
+            <Form.Control as="select">
+              <option> Covid Positive </option>
+              <option> Covid Negative </option>
+            </Form.Control>
+          </Form.Group>
+
+          <Form.Group controlId="exampleForm.ControlTextarea1">
+            <Form.Label>Reason for Visit?</Form.Label>
+            <Form.Control as="textarea" rows={1} />
+          </Form.Group>
+
+          <Form.Group controlId="exampleForm.ControlTextarea1">
+            <Form.Label>Room Floor and Number </Form.Label>
+            <Form.Control as="textarea" rows={1} />
+          </Form.Group>
+
+
             <Button variant='primary' type='submit'> 
             Submit
             </Button>

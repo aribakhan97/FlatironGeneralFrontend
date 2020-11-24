@@ -15,8 +15,14 @@ class PatientContainer extends React.Component {
     }
     componentDidMount(){
         let id=window.location.pathname.split('/')[2]
-        console.log(id)
-        fetch('http://localhost:4000/patients/'+ id)
+        let options = {
+            method: "GET" ,
+            headers:{
+              "content-type" : "application/json",
+              "accept" : "application/json"
+            },
+          }
+        fetch('http://localhost:4000/patients/'+ id,options)
         .then(response => response.json())
         .then(p => {
             console.log(p)
@@ -71,7 +77,7 @@ class PatientContainer extends React.Component {
           fetch('http://localhost:4000/exams/', options)
           .then(response => response.json())
           .then(data => {
-            this.setState({exams: [...this.state.exams,data]})
+            this.setState({exams: [...this.state.exams,exam]})
           })
     }
     

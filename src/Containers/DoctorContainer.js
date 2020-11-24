@@ -38,6 +38,17 @@ class DoctorContainer extends React.Component {
         let remove = this.state.patients.filter(patient=> patient.id !== p.id)
         console.log(remove)
         this.setState({patients:remove})
+
+        let options = {
+            method: "DELETE" ,
+            headers:{
+              "content-type" : "application/json",
+              "accept" : "application/json"
+            },
+          }
+
+          fetch('http://localhost:4000/patients/' + p.id, options)
+          .then(response => response.json())
     } 
 
     removePriority = (p) => {
@@ -62,16 +73,19 @@ class DoctorContainer extends React.Component {
         let relationship = e.target[9].value
         let emergencyNumber = e.target[10].value
         let comments = e.target[11].value
+        let covid = e.target[12].value
+        let visit = e.target[13].value
+        let room = e.target[14].value
 
         let newPatientObject = {
             name: name, 
             age: age,
             gender: gender,
-            has_covid: false,
-            reason_for_visit: '',
+            has_covid: (covid ==='Covid Positive'),
+            reason_for_visit: visit,
             comments: comments,
             priority: false,
-            floor: ' ',
+            floor: room,
             office_id: this.props.office.id,
             profile:{
                 personalInfo:{

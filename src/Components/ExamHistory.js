@@ -4,9 +4,16 @@ import { Card, Accordion } from "react-bootstrap";
 class ExamHistory extends React.Component {
   render() {
       console.log(this.props.exams)
+      let exams = this.props.exams
+      console.log(exams)
     return (
       <Accordion defaultActiveKey="0">
-        {this.props.exams.map((e, i) => {
+        {exams.map((e, i) => {
+            let vitals = JSON.parse(e.vitals)
+            console.log('vitals', vitals)
+            let physical = JSON.parse(e.physical)
+            console.log('physical', physical)
+
           return (
             <Card>
               <Accordion.Toggle as={Card.Header} eventKey={""+ i}>
@@ -14,7 +21,26 @@ class ExamHistory extends React.Component {
               </Accordion.Toggle>
               <Accordion.Collapse eventKey={"" + i}>
                 <Card.Body>
-                    Diagnosis: {e.diagnosis}
+                    <h2>Vitals</h2>
+                    <p>Height: {vitals.height}</p>
+                    <p>Weight: {vitals.weight}</p>
+                    <p>Temperature: {vitals.temperature}</p>
+                    <p>Oxygen: {vitals.oxygen}</p>
+                    <p>Blood Pressure: {vitals.bp}</p>
+                    <p>Heart Rate: {vitals.hr}</p>
+                    <p>Respiratory Rate: {vitals.rr}</p>
+                    
+                    <h2>Physical Exam</h2>
+                    <p>Overall Appearance: {physical.appearance}</p>
+                    <p> Heart Sounds: {physical.hs}</p>
+                    <p> Lung Sounds: {physical.ls}</p>
+                    <p> Pupils: {physical.pupils}</p>
+                    <p>Stomach Palpation: {physical.sp}</p>
+                    <h2>Doctors Notes</h2>
+                    <p>Diagnosis: {e.diagnosis}</p>
+                    <p>Comments: {e.comments}</p>
+
+
                 </Card.Body>
               </Accordion.Collapse>
             </Card>
