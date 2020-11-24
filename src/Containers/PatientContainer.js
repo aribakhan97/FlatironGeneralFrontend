@@ -4,6 +4,8 @@ import ExamForm from '../Components/ExamForm'
 import { ExamModal } from '../Components/ExamModal'
 import {Button} from "react-bootstrap"
 import ExamHistory from '../Components/ExamHistory'
+import history from '../Components/history'
+
 
 class PatientContainer extends React.Component {
 
@@ -93,7 +95,9 @@ class PatientContainer extends React.Component {
         let smoking = (this.state.isLoaded && patient.profile.smoking) ? 'Yes' : 'No'
         return  (
             <div> 
-
+                <Button onClick={() => history.push('/')}> 
+                    Back
+                </Button>
             {this.state.isLoaded &&
             <div> 
                 <h1> {patient.name} {patient.age} {patient.gender} {covid} </h1>
@@ -105,7 +109,7 @@ class PatientContainer extends React.Component {
                 <p> History of Hypertension or Diabetes in Mom or Dad? {profile.history} </p>
                 <p> Smoke or use Tobacco Products? {smoking} </p>
 
-                <h4> Patient Vitals </h4>
+                <h4> Most Recent Vitals </h4>
                 <p> Height in inches: {profile.vitals.height}</p>
                 <p> Weight in pounds: {profile.vitals.weight}</p>
                 <p> Temperature in Fahrenheit: {profile.vitals.temperature}</p>

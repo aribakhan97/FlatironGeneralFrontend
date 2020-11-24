@@ -1,12 +1,12 @@
 import React from "react";
-import {Table, Button} from "react-bootstrap";
+import {Table, Button, ButtonGroup} from "react-bootstrap";
 import history from './history'
 import {withRouter} from 'react-router'
 
 
 class PatientList extends React.Component {
   render() {
-      
+      let removeButton = this.props.isPriorityTable? 'Remove Priority': 'Remove'
     return (
       <Table striped bordered hover>
         <thead>
@@ -34,18 +34,20 @@ class PatientList extends React.Component {
                       <td>{covid}</td>
                       <td>{p.reason_for_visit}</td>
                       <td>
+                        <ButtonGroup>
                         <Button variant='danger' size='sm' onClick={(e) => {
                           e.stopPropagation()
                           this.props.removeButton(p)
                           }}>
-                          Remove
+                          {removeButton}
                         </Button>
-                        <Button onClick={(e) =>{
+                        <Button size='sm' onClick={(e) =>{
                           e.stopPropagation()
                           history.push('/patients/' + p.id)
                         }}>
                           Chart
                         </Button>
+                        </ButtonGroup>
                       </td>
                     </tr>
                     )

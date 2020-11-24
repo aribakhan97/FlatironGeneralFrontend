@@ -1,7 +1,7 @@
 import React from 'react'
 import {NewPatientModal} from '../Components/NewPatientModal'
 import PatientList from '../Components/PatientList'
-import {Button} from "react-bootstrap"
+import {Button, Jumbotron} from "react-bootstrap"
 
 class DoctorContainer extends React.Component {
 
@@ -144,14 +144,18 @@ class DoctorContainer extends React.Component {
     render(){
         return  (
             <div>
-                <h1> "Welcome Back Dr.Grey!" </h1>
+                <Jumbotron> <h1> Welcome Back {this.props.doctor.name} </h1></Jumbotron>
                 <NewPatientModal onFormSubmit={this.handleSubmit} office={this.props.office} onHide={()=> this.toggleNewPatientModal(false)} show={this.state.showNewPatientModal}/>
-                <h1> All Patients</h1>
+                <h1> Here is a list of all your patients {this.props.doctor.name}</h1>
+                <h4> In order to add patient High Priority List click on Patient Name</h4>
                 <PatientList removeButton={this.removePatient} addPriority={this.addPriority} patients={this.state.patients}/>
                 <h1> High Priority Patients</h1>
                 <PatientList removeButton={this.removePriority} isPriorityTable={true} patients={this.state.highPriority}/>
                 <Button variant="primary" onClick={() => this.toggleNewPatientModal(true)}>
                     Add New Patient
+                </Button>
+                <Button onClick={() => this.props.logout()}>
+                    Logout
                 </Button>
             </div>
         )
