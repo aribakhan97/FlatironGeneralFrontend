@@ -5,6 +5,8 @@ import { ExamModal } from '../Components/ExamModal'
 import {Button} from "react-bootstrap"
 import ExamHistory from '../Components/ExamHistory'
 import history from '../Components/history'
+import Medication from '../Components/Medication'
+
 
 
 class PatientContainer extends React.Component {
@@ -13,7 +15,8 @@ class PatientContainer extends React.Component {
         patient: {},
         isLoaded: false,
         showExamModal: false,
-        exams: []
+        exams: [],
+        showMedication: false
     }
     componentDidMount(){
         let id=window.location.pathname.split('/')[2]
@@ -34,6 +37,10 @@ class PatientContainer extends React.Component {
   toggleExamModal = (show) => {
     this.setState({showExamModal: show})
     }
+
+    toggleMedication = (show) => {
+        this.setState({showMedication: show})
+        }
 
     handleSubmit = (e) => {
         console.log(e)
@@ -121,6 +128,10 @@ class PatientContainer extends React.Component {
                 <ExamModal handleSubmit={this.handleSubmit} onHide={() => this.toggleExamModal(false)} show={this.state.showExamModal}/>
                 <Button variant="primary" onClick={() => this.toggleExamModal(true)}>
                     Add New Exam
+                </Button>
+                <Medication onHide={() => this.toggleMedication(false)} show={this.state.showMedication} allergies={profile.allergies} currentMedications={profile.current_medications}/>
+                <Button variant="primary"  onClick={() => this.toggleMedication(true)}>
+                    Prescribe Medication
                 </Button>
                 <ExamHistory exams={this.state.exams}/>
                 

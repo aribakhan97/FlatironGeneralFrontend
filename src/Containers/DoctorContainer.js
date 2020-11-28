@@ -147,7 +147,7 @@ class DoctorContainer extends React.Component {
                 <Jumbotron> <h1> Welcome Back {this.props.doctor.name} </h1></Jumbotron>
                 <NewPatientModal onFormSubmit={this.handleSubmit} office={this.props.office} onHide={()=> this.toggleNewPatientModal(false)} show={this.state.showNewPatientModal}/>
                 <h1> Here is a list of all your patients {this.props.doctor.name}</h1>
-                <h4> In order to add patient High Priority List click on Patient Name</h4>
+                <h4> In order to add patient to High Priority List click on Patient Name</h4>
                 <PatientList removeButton={this.removePatient} addPriority={this.addPriority} patients={this.state.patients}/>
                 <h1> High Priority Patients</h1>
                 <PatientList removeButton={this.removePriority} isPriorityTable={true} patients={this.state.highPriority}/>
