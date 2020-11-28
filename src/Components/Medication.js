@@ -17,7 +17,7 @@ export function Medication(props) {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            <SearchMedication allergies={props.allergies} currentMedications={props.current_medications}/>
+            <SearchMedication allergies={props.allergies} currentMedications={props.currentMedications}/>
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={props.onHide}>Close</Button>
