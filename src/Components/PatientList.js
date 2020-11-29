@@ -1,5 +1,5 @@
 import React from "react";
-import {Table, Button, ButtonGroup} from "react-bootstrap";
+import {Table, Button, ButtonGroup, Badge} from "react-bootstrap";
 import history from './history'
 import {withRouter} from 'react-router'
 
@@ -8,7 +8,7 @@ class PatientList extends React.Component {
   render() {
       let removeButton = this.props.isPriorityTable? 'Remove Priority': 'Remove'
     return (
-      <Table striped bordered hover>
+      <Table striped bordered hover className='patient-table'>
         <thead>
           <tr>
             <th>Floor/Room Number</th>
@@ -23,6 +23,7 @@ class PatientList extends React.Component {
               {
                 this.props.patients.map(p => {
                     let covid=(p.has_covid) ? 'Covid Positive' : 'Covid Negative'
+                    let covidBadge = p.has_covid ? 'danger' : 'secondary'
                     return (
                     <tr onClick={() => {
                       if(!this.props.isPriorityTable){
@@ -31,7 +32,9 @@ class PatientList extends React.Component {
                       }}>
                       <td>{p.floor}</td>
                       <td>{p.name}</td>
-                      <td>{covid}</td>
+                      <td>
+                      <Badge variant={covidBadge}>{covid}</Badge>
+                      </td>
                       <td>{p.reason_for_visit}</td>
                       <td>
                         <ButtonGroup>

@@ -7,7 +7,7 @@ class Search extends React.Component {
     return (
       <InputGroup className="mb-3" onChange={(e) => this.props.searchHandler(e)}>
         <InputGroup.Prepend>
-          <InputGroup.Text id="inputGroup-sizing-default">
+          <InputGroup.Text className='doctor-search-prefix' id="inputGroup-sizing-default">
             Search Patient Name
           </InputGroup.Text>
         </InputGroup.Prepend>

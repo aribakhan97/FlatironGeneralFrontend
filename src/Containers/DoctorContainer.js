@@ -155,21 +155,22 @@ class DoctorContainer extends React.Component {
         })
 
         return  (
-            <div>
-                <Jumbotron> <h1> Welcome Back {this.props.doctor.name} </h1></Jumbotron>
+            <div className='page-background'>
+                <Button className='button-color' onClick={() => this.props.logout()}>
+                    Logout
+                </Button>
+
+                <Jumbotron className='doctor-jumbotron'> <h1> Welcome Back {this.props.doctor.name} </h1></Jumbotron>
                 <Search searchHandler={this.searchHandler}/>
                 <NewPatientModal onFormSubmit={this.handleSubmit} office={this.props.office} onHide={()=> this.toggleNewPatientModal(false)} show={this.state.showNewPatientModal}/>
                 <h1> Here is a list of all your patients {this.props.doctor.name}</h1>
                 <h4> In order to add patient to High Priority List click on Patient Name</h4>
+                <Button className='button-color' variant="primary" onClick={() => this.toggleNewPatientModal(true)}>
+                    Add New Patient
+                </Button>
                 <PatientList removeButton={this.removePatient} addPriority={this.addPriority} patients={filteredPatients}/>
                 <h1> High Priority Patients</h1>
                 <PatientList removeButton={this.removePriority} isPriorityTable={true} patients={this.state.highPriority}/>
-                <Button variant="primary" onClick={() => this.toggleNewPatientModal(true)}>
-                    Add New Patient
-                </Button>
-                <Button onClick={() => this.props.logout()}>
-                    Logout
-                </Button>
             </div>
         )
         
