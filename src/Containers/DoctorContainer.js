@@ -84,6 +84,7 @@ class DoctorContainer extends React.Component {
         let covid = e.target[12].value
         let visit = e.target[13].value
         let room = e.target[14].value
+        let image = e.target[15].value
 
         let newPatientObject = {
             name: name, 
@@ -95,7 +96,8 @@ class DoctorContainer extends React.Component {
             priority: false,
             floor: room,
             office_id: this.props.office.id,
-            profile:{
+            image: image,
+            profile: JSON.stringify({
                 personalInfo:{
                     birthday: birthday,
                     address: address,
@@ -113,7 +115,7 @@ class DoctorContainer extends React.Component {
               surgeries: [],
               history: [],
               smoking: false,
-            }
+            })
         }
         let options = {
             method: "POST" ,

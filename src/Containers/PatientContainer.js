@@ -72,8 +72,8 @@ class PatientContainer extends React.Component {
 
     let exam = {
       date: date,
-      vitals: vitals,
-      physical: physical,
+      vitals: JSON.stringify(vitals),
+      physical: JSON.stringify(physical),
       diagnosis: diagnosis,
       comments: comments,
       patient_id: this.state.patient.id,
@@ -149,7 +149,7 @@ class PatientContainer extends React.Component {
                   <Col className="patient-img" sm>
                     <Image
                       style={{ width: "171px", height: "180px" }}
-                      src="https://vignette.wikia.nocookie.net/ricksanchez/images/7/71/Rick.jpg/revision/latest/top-crop/width/360/height/450?cb=20160605174338"
+                      src={patient.image}
                       rounded
                     />
                   </Col>
@@ -181,6 +181,8 @@ class PatientContainer extends React.Component {
                 </Col>
                 <Col className="info-border">
                   <h4> Most Recent Vitals </h4>
+                  {profile.vitals &&
+                  <div>
                   <p> Height in inches: {profile.vitals.height}</p>
                   <p> Weight in pounds: {profile.vitals.weight}</p>
                   <p>
@@ -190,7 +192,7 @@ class PatientContainer extends React.Component {
                   <p> Oxygen: {profile.vitals.oxygen}</p>
                   <p> Blood Pressure: {profile.vitals.bp}</p>
                   <p> Heart Rate: {profile.vitals.hr}</p>
-                  <p> Respiratory Rate: {profile.vitals.rr}</p>
+                  <p> Respiratory Rate: {profile.vitals.rr}</p></div>}
                 </Col>
               </Row>
             </Container>

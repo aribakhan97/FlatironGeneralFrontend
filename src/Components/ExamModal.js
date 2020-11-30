@@ -6,6 +6,7 @@ import {Modal, Button} from "react-bootstrap"
 export function ExamModal(props) {
     return (
       <Modal
+      className='modal-color'
         {...props}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"

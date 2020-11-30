@@ -81,3 +81,16 @@
   border: 2px solid !important;
   border-color: navy;
 }
+
+.modal-content {
+  background-color: rgb(164, 224, 244) !important ;
+}
+
+.card {
+  background-color: rgb(164, 224, 244) !important;
+}
+
+.card-header{
+background-color: navy !important; 
+color: white;
+}
