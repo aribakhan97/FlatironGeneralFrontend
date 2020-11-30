@@ -5,7 +5,6 @@
   padding-left: 25%;
   padding-right: 25%;
   padding-top: 10%;
-  width: 50%;
   background-image: url("./Assets/steth\ back.jpg");
   background-position: center;
   background-repeat: no-repeat;
@@ -14,13 +13,49 @@
   height: 1000px;
 }
 
+.login-form {
+  padding-top: 10px;
+  width: 60%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.center {
+  text-align: center;
+  display: block;
+}
+
 .page-background {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  padding: 5%;
+}
+
+.page-background::before {
+  content: "";
   background-image: url("./Assets/hospital\ background.jpeg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  width: 100%;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  opacity: 0.5;
+}
+
+.doctor-page {
+  background-image: url("./Assets/hospital\ background.jpeg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  position: relative;
   height: 100%;
+  width: 100%;
   padding: 5%;
 }
 
@@ -90,14 +125,13 @@
   background-color: rgb(164, 224, 244) !important;
 }
 
-.card-header{
-background-color: navy !important; 
-color: white;
+.card-header {
+  background-color: navy !important;
+  color: white;
 }
 
-.login-container img{
-display: block;
-margin-left: auto;
-margin-right: auto;
-width: 50%;
+.login-container img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }

@@ -7,7 +7,7 @@ class LoginContainer extends React.Component {
     return (
       <div className='login-container'>
         <img src = {logo}/> 
-      <Form  onSubmit={(e) => this.props.handleLogin(e)}>
+      <Form  className='login-form center' onSubmit={(e) => this.props.handleLogin(e)}>
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Username</Form.Label>
           <Form.Control type="text" placeholder="Enter username" />
