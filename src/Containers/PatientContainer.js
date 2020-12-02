@@ -128,7 +128,7 @@ class PatientContainer extends React.Component {
             variant="primary"
             onClick={() => this.toggleMedication(true)}
           >
-            Prescribe Medication
+            Check Interactions
           </Button>
         </ButtonGroup>
 
