@@ -5,6 +5,8 @@ import { Button, Jumbotron } from "react-bootstrap";
 import Search from "../Components/Search";
 import history from "../Components/history";
 
+const BASEURL = 'https://flatiron-general-hospital.herokuapp.com/'
+
 class DoctorContainer extends React.Component {
   state = {
     patients: [],
@@ -28,7 +30,7 @@ class DoctorContainer extends React.Component {
       body: JSON.stringify(p),
     };
 
-    fetch("http://localhost:4000//patients/" + p.id, options).then((response) =>
+    fetch(BASEURL + "/patients/" + p.id, options).then((response) =>
       response.json()
     );
   };
@@ -54,7 +56,7 @@ class DoctorContainer extends React.Component {
       },
     };
 
-    fetch("http://localhost:4000/patients/" + p.id, options).then((response) =>
+    fetch(BASEURL + "/patients/" + p.id, options).then((response) =>
       response.json()
     );
   };
@@ -127,7 +129,7 @@ class DoctorContainer extends React.Component {
       body: JSON.stringify(newPatientObject),
     };
 
-    fetch("http://localhost:4000/patients/", options)
+    fetch(BASEURL + "/patients/", options)
       .then((response) => response.json())
       .then((data) => {
         this.setState({ patients: [...this.state.patients, data] });
@@ -140,7 +142,7 @@ class DoctorContainer extends React.Component {
       } else {
   
   
-    fetch("http://localhost:4000/patient_list/" + this.props.doctor.id)
+    fetch(BASEURL + "/patient_list/" + this.props.doctor.id)
       .then((response) => response.json())
       .then((patientList) => {
         this.setState({

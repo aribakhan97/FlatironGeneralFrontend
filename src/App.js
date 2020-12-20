@@ -10,7 +10,7 @@ import { Router, Redirect, Switch, Route } from "react-router-dom";
 function getOffice() {
   return { id: 1 };
 }
-
+const BASEURL = 'https://flatiron-general-hospital.herokuapp.com/'
 class App extends React.Component {
   state = {
     isLoggedIn: false,
@@ -34,7 +34,7 @@ class App extends React.Component {
       body: JSON.stringify({ username: username, password: password }),
     };
 
-    fetch("http://localhost:4000/login", options)
+    fetch(BASEURL + '/login', options)
       .then((response) => response.json())
       .then((data) => {
         if (data.isLoggedIn) {

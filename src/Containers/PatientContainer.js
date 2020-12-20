@@ -14,6 +14,8 @@ import ExamHistory from "../Components/ExamHistory";
 import history from "../Components/history";
 import Medication from "../Components/Medication";
 
+const BASEURL = 'https://flatiron-general-hospital.herokuapp.com/'
+
 class PatientContainer extends React.Component {
   state = {
     patient: {},
@@ -31,7 +33,7 @@ class PatientContainer extends React.Component {
         accept: "application/json",
       },
     };
-    fetch("http://localhost:4000/patients/" + id, options)
+    fetch(BASEURL + '/patients/' + id, options)
       .then((response) => response.json())
       .then((p) => {
         console.log(p);
